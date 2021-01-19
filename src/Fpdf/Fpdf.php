@@ -513,7 +513,7 @@ function SetFont($family, $style='', $size=0)
 	$this->FontFamily = $family;
 	$this->FontStyle = $style;
 	$this->FontSizePt = $size;
-	$this->FontSize = $size/$this->k;
+	$this->FontSize = intval($size)/$this->k;
 	$this->CurrentFont = &$this->fonts[$fontkey];
 	if($this->page>0)
 		$this->_out(sprintf('BT /F%d %.2F Tf ET',$this->CurrentFont['i'],$this->FontSizePt));
@@ -577,7 +577,7 @@ function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link
 {
 	// Output a cell
 	$k = $this->k;
-	if($this->y+$h>$this->PageBreakTrigger && !$this->InHeader && !$this->InFooter && $this->AcceptPageBreak())
+	if($this->y+floatval($h)>$this->PageBreakTrigger && !$this->InHeader && !$this->InFooter && $this->AcceptPageBreak())
 	{
 		// Automatic page break
 		$x = $this->x;
